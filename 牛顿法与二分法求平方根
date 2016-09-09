@@ -1,0 +1,38 @@
+public class Sqrt_NewtonMethod {
+	public static void main(String[] args) {
+		long s = System.currentTimeMillis();
+		System.out.println(sqrt(1234567890) + "运行时间为："+(System.currentTimeMillis()-s));
+		s = System.currentTimeMillis();
+		System.out.println(sqrt2(1234567890) + "运行时间为："+(System.currentTimeMillis()-s));
+	}
+	/**
+	 * 通过牛顿迭代求解平方根
+	 * @param n 
+	 * @return
+	 */
+	public static double sqrt(double n){
+		double c0 = n;
+		double c = (n + c0 * c0) / 2.0 / c0;
+		while(Math.abs(c-c0) > 0.000000001){
+			c0 = c;
+			c = (n + c0 * c0) / 2.0 / c0;
+		}
+		return c;
+	}
+	/**
+	 * 二分法求平方根
+	 * @param n
+	 */
+	public static double sqrt2(double n){
+		double begin = 0;
+		double end = (n > 1 ? n : 1.0);
+		while(end - begin > 0.000000001){
+			double mid = (begin + end)/2;
+			if(mid * mid - n > 0)
+				end = mid;
+			else
+				begin = mid;
+		}
+		return end;
+	}
+}
